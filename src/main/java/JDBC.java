@@ -6,7 +6,7 @@ import java.util.Map;
         public static void main(String[] args) {
 
             try(Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie_tracker", "root", "yearup");
-                PreparedStatement statement = connection.prepareStatement("SELECT movie_title FROM movies");
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM users");
             ) {
                 Map<String, String> columns = new HashMap();
                 try(ResultSet rs = statement.executeQuery()) {
