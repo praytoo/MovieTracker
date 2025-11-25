@@ -4,40 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6190ad82-9646-4f81-ba24-af80e47e42d0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/movietracker/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/impl/UserRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="6190ad82-9646-4f81-ba24-af80e47e42d0" name="Changes" comment="Merge branch 'main' of https://github.com/praytoo/MovieTracker into feature/getwishlist&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/movietracker/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/movietracker/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/impl/MovieRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/impl/MovieRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/WishListRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/WishListRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CoverageOptionsProvider">
-    <option name="myActivateViewOnRun" value="false" />
-    <option name="myShowInProjectView" value="false" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -48,8 +34,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/praytoo/MovieTracker.git&quot;,
-    &quot;accountId&quot;: &quot;13a9ed1e-b57e-4379-8eda-c3917c8c4e34&quot;
+    &quot;url&quot;: &quot;git@github.com:praytoo/MovieTracker.git&quot;,
+    &quot;accountId&quot;: &quot;e8803082-f40a-4bfb-b8da-9eb15cf1ff89&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -62,20 +48,19 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Application (2).executor": "Run",
     "Application.Application.executor": "Run",
-    "Application.UserLogin.executor": "Run",
+    "Application.WishListRepository.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/user-login-system",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "feature/getwishlist",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/reetkaur/pluralsight/MovieTracker",
+    "last_opened_file_path": "/Users/vitasych/IdeaProjects/MovieTracker/pom.xml",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "coverage"
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -83,11 +68,11 @@
       <recent name="org.movietracker.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Application (2)">
-    <configuration name="Application (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.WishListRepository">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.movietracker.Application" />
       <module name="MovieTracker" />
-      <option name="PROGRAM_PARAMETERS" value="root yearup24" />
+      <option name="PROGRAM_PARAMETERS" value="root yearup25" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.movietracker.*" />
@@ -98,20 +83,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.movietracker.Application" />
+    <configuration name="WishListRepository" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.movietracker.repository.WishListRepository" />
       <module name="MovieTracker" />
-      <option name="PROGRAM_PARAMETERS" value="root yearup24" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.movietracker.userloginsystem.UserLogin" />
-      <module name="MovieTracker" />
+      <option name="PROGRAM_PARAMETERS" value="root yearup" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.movietracker.userloginsystem.*" />
+          <option name="PATTERN" value="org.movietracker.repository.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -119,10 +97,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Application" />
+      <item itemvalue="Application.WishListRepository" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Application (2)" />
-        <item itemvalue="Application.UserLogin" />
+        <item itemvalue="Application.WishListRepository" />
         <item itemvalue="Application.Application" />
       </list>
     </recent_temporary>
@@ -135,6 +116,15 @@
       <option name="presentableId" value="Default" />
       <updated>1764040721226</updated>
     </task>
+    <task id="LOCAL-00001" summary="Merge branch 'main' of https://github.com/praytoo/MovieTracker into feature/getwishlist&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml">
+      <option name="closed" value="true" />
+      <created>1764101796512</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1764101796512</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,10 +137,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MovieTracker$Application.ic" NAME="Application Coverage Results" MODIFIED="1764105018286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>org.movietracker.*</FILTER>
-    </SUITE>
   </component>
 </project>
