@@ -40,14 +40,14 @@ public class WishList {
     }
 
     public static String promptMovieName() {
-        System.out.println("What movie would you like to add to your wish list?");
+        System.out.println("What movie id would you like to add to your wish list?");
         String movieName = scanner.nextLine();
         System.out.println("Adding movie to wishlist...");
         return movieName;
     }
 
     public static /*Movie*/ Object findMovieByTitle(Connection connection, String movieName) throws SQLException {
-        String query = "SELECT * FROM movies WHERE title = ?";
+        String query = "SELECT * FROM movies WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, movieName);
         // execute query
