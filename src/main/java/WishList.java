@@ -43,7 +43,7 @@ public class WishList {
         System.out.println("What movie would you like to watch?");
         String movieName = scanner.nextLine();
         System.out.println("Loading movie...");
-            String line = "NOW PLAYING… " + movieName;
+            String line = "       NOW PLAYING…" + movieName;
             // pad or trim to 40 characters
             line = String.format("%-40s", line);
 
