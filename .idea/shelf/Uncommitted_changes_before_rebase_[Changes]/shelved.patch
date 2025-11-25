@@ -1,0 +1,63 @@
+Index: src/main/java/WishList.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/WishList.java b/src/main/java/org/example/repository/WishListRepository.java
+rename from src/main/java/WishList.java
+rename to src/main/java/org/example/repository/WishListRepository.java
+--- a/src/main/java/WishList.java	(revision 41d5b91a3008d78acf7c29ced40be86a6280c4d2)
++++ b/src/main/java/org/example/repository/WishListRepository.java	(date 1764095723087)
+@@ -1,7 +1,9 @@
++package org.example.repository;
++
+ import java.sql.*;
+ import java.util.Scanner;
+ 
+-public class WishList {
++public class WishListRepository {
+     private static Scanner scanner = new Scanner(System.in);
+ 
+     public static void main(String[] args) throws SQLException {
+@@ -9,7 +11,7 @@
+         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie_tracker", "root", "yearup");
+         //displayAllMovies(connection);
+         displayAllMovies(connection);
+-        String movieName = promptMovieName();
++        Integer movieId = promptMovieId();
+         connection.close();
+         scanner.close();
+     }
+@@ -39,17 +41,18 @@
+         }
+     }
+ 
+-    public static String promptMovieName() {
++    public static Integer promptMovieId() {
+         System.out.println("What movie id would you like to add to your wish list?");
+-        String movieName = scanner.nextLine();
++        Integer movieId = scanner.nextInt();
++        scanner.nextLine();
+         System.out.println("Adding movie to wishlist...");
+-        return movieName;
++        return movieId;
+     }
+ 
+-    public static /*Movie*/ Object findMovieByTitle(Connection connection, String movieName) throws SQLException {
++    public static /*Movie*/ Object findMovieByTitle(Connection connection, Integer movieId) throws SQLException {
+         String query = "SELECT * FROM movies WHERE id = ?";
+         PreparedStatement statement = connection.prepareStatement(query);
+-        statement.setString(1, movieName);
++        statement.setInt(1, movieId);
+         // execute query
+         ResultSet rs = statement.executeQuery();
+ 
+@@ -62,7 +65,7 @@
+     }
+ 
+     public static void addMovieToWishList(Connection connection, Object movie) throws SQLException {
+-        String query = "INSERT INTO wish_list (movie_id, user_id) VALUES (?, ?)";
++        String query = "INSERT INTO wish_list_relation (movie_id, user_id) VALUES (?, ?)";
+         //replace x y z with real columns
+         PreparedStatement statement = connection.prepareStatement(query);
+         statement.setString(1, "movie.getMovie_id");
