@@ -8,7 +8,7 @@ public class WishListRepository {
 
     public static void main(String[] args) throws SQLException {
         // get the connection
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie_tracker", "root", "yearup");
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie_tracker", args[0], args[1]);
         //displayAllMovies(connection);
         displayAllMovies(connection);
         Integer movieId = promptMovieId();
