@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.movietracker.repository;
 
 import java.sql.*;
 import java.util.Scanner;
