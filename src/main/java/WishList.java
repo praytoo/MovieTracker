@@ -40,20 +40,34 @@ public class WishList {
     }
 
     public static String promptMovieName() {
-        System.out.println("What movie would you like to watch?");
+        System.out.println("What movie would you like to add to your wish list?");
         String movieName = scanner.nextLine();
-        System.out.println("Loading movie...");
-            String line = "       NOW PLAYING…" + movieName;
-            // pad or trim to 40 characters
-            line = String.format("%-40s", line);
-
-            System.out.println("                    ┌──────────────────────────────────────────┐");
-            System.out.println("                    │                                          │");
-            System.out.println("                    │  " + line + "│");
-            System.out.println("                    │                                          │");
-            System.out.println("                    └──────────────────────────────────────────┘");
-            System.out.println();
-            System.out.println();
+        System.out.println("Adding movie to wishlist...");
         return movieName;
+    }
+
+    public static /*Movie*/ Object findMovieByTitle(Connection connection, String movieName) throws SQLException {
+        String query = "SELECT * FROM movies WHERE title = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, movieName);
+        // execute query
+        ResultSet rs = statement.executeQuery();
+
+        while(rs.next()){
+            return null;
+            //replace with movie object once we have that
+        }
+        return null;
+        //null stays there in case no movie found
+    }
+
+    public static void addMovieToWishList(Connection connection, Object movie) throws SQLException {
+        String query = "INSERT INTO wish_list (movie_id, user_id) VALUES (?, ?)";
+        //replace x y z with real columns
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, "movie.getMovie_id");
+        statement.setString(2, "movie.getUser_id");
+        //execute query
+        statement.executeUpdate();
     }
 }
