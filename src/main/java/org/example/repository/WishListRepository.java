@@ -29,14 +29,10 @@ public class WishListRepository {
             System.out.println("Movie id: " + rs.getString("movie_id"));
             System.out.println("Date Released: " + rs.getString("date_released"));
             System.out.println("Genre: " + rs.getString("genre"));
-            System.out.println("Cast: " + rs.getString("cast"));
             System.out.println("Title: " + rs.getString("title"));
             System.out.println("Average Percent Rating: " + rs.getInt("avg_percentage_rating"));
             System.out.println("Parental Rating: " + rs.getString("parental_rating"));
-            System.out.println("Individual Star Rating: " + rs.getInt("individual_star_rating"));
             System.out.println("Description: " + rs.getString("description"));
-            System.out.println("Wishlist id: " + rs.getInt("wishlist_id"));
-            System.out.println("Watched List id: " + rs.getInt("watched_id"));
             System.out.println("--------------------");
         }
     }
