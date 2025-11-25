@@ -136,7 +136,7 @@ VALUES
 ('The Matrix', 'Sci-Fi', 88, 'R', '1999-03-31', 'A computer hacker learns about the true nature of his reality and his role in the war against its controllers.'),
 ('Star Wars: A New Hope', 'Sci-Fi', 92, 'PG', '1977-05-25', 'Luke Skywalker joins forces to save the galaxy from the evil Empire.'),
 ('The Lion King', 'Animation', 90, 'G', '1994-06-24', 'A young lion prince flees his kingdom only to learn the true meaning of responsibility and bravery.'),
-('Spider-Man: No Way Home', 'Action', 87, 'PG-13', 'Peter Parker seeks Doctor Strange\'s help to make the world forget his identity as Spider-Man.');
+('Spider-Man: No Way Home', 'Action', 87, 'PG-13', '1994-06-24', 'Peter Parker seeks Doctor Strange help to make the world forget his identity as Spider-Man.');
 
 
 INSERT INTO Users (first_name, last_name, email)
