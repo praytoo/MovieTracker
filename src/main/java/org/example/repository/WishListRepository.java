@@ -12,6 +12,8 @@ public class WishListRepository {
         //displayAllMovies(connection);
         displayAllMovies(connection);
         Integer movieId = promptMovieId();
+        addMovieToWishList(connection, movieId, 1);
+        viewWishList(connection, 1);
         connection.close();
         scanner.close();
     }
@@ -26,7 +28,7 @@ public class WishListRepository {
 
         // process results
         while(rs.next()) {
-            System.out.println("Movie id: " + rs.getString("movie_id"));
+            System.out.println("Movie id: " + rs.getInt("movie_id"));
             System.out.println("Date Released: " + rs.getString("date_released"));
             System.out.println("Genre: " + rs.getString("genre"));
             System.out.println("Title: " + rs.getString("title"));
@@ -45,7 +47,7 @@ public class WishListRepository {
         return movieId;
     }
 
-    public static /*Movie*/ Object findMovieByTitle(Connection connection, Integer movieId) throws SQLException {
+    public static /*Movie*/ Object findMovieByID(Connection connection, Integer movieId) throws SQLException {
         String query = "SELECT * FROM movies WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, movieId);
@@ -60,13 +62,34 @@ public class WishListRepository {
         //null stays there in case no movie found
     }
 
-    public static void addMovieToWishList(Connection connection, Object movie) throws SQLException {
+    public static void addMovieToWishList(Connection connection, Integer movieId, Integer user_id) throws SQLException {
         String query = "INSERT INTO wish_list_relation (movie_id, user_id) VALUES (?, ?)";
-        //replace x y z with real columns
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, "movie.getMovie_id");
-        statement.setString(2, "movie.getUser_id");
+        statement.setInt(1, movieId);
+        statement.setInt(2, user_id);
         //execute query
         statement.executeUpdate();
+    }
+
+    public static void viewWishList(Connection connection, Integer user_id) throws SQLException {
+        // create statement
+        String query = "SELECT * \n" +
+                "FROM movie_tracker.wish_list_relation AS wlr\n" +
+                "JOIN movie_tracker.movies AS m\n" +
+                "ON wlr.movie_id = m.movie_id\n" +
+                "WHERE user_id = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, user_id);
+
+        // execute query
+        ResultSet rs = statement.executeQuery();
+
+        // process results
+        while(rs.next()) {
+            System.out.println("Id: " + rs.getInt("id"));
+            System.out.println("Movie id: " + rs.getInt("movie_id"));
+            System.out.println("User id: " + rs.getInt("user_id"));
+            System.out.println("--------------------");
+        }
     }
 }
