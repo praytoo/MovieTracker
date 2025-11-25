@@ -1,28 +1,4 @@
-ALTER TABLE watched_list
 
-DROP COLUMN individual_star_rating,
-DROP COLUMN title;
-
-ALTER TABLE wish_list
-DROP COLUMN avg_percentage_rating,
-DROP COLUMN parental_rating,
-DROP COLUMN description;
-
-ALTER TABLE my_movie_ratings
-DROP COLUMN title;
-
-ALTER TABLE ratings
-DROP COLUMN date_released,
-DROP COLUMN title,
-DROP COLUMN parental_rating,
-DROP COLUMN avg_percentage_rating;
-
-ALTER TABLE wish_list
-DROP COLUMN title;
-
-ALTER TABLE users
-DROP COLUMN wishlist_id,
-DROP COLUMN watched_id;
 
 INSERT INTO `movie_tracker`.`movies`
 (`movie_id`,
