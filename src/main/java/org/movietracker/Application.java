@@ -11,6 +11,7 @@ public class Application {
         bds.setUrl("jdbc:mysql://localhost:3306/movie_tracker");
         bds.setUsername(args[0]);
         bds.setPassword(args[1]);
+
         UserInterface cli = new UserInterface(bds);
         cli.start();
     }

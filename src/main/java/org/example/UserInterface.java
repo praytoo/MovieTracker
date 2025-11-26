@@ -1,6 +1,8 @@
 package org.example;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.movietracker.model.User;
+import org.movietracker.repository.impl.UserRepositoryImpl;
 import org.movietracker.model.Genre;
 import org.movietracker.model.Movie;
 import org.movietracker.repository.impl.MovieRepositoryImpl;
@@ -28,16 +30,18 @@ public class UserInterface {
         homeScreen();
     }
 
-    //********************
-    //HOME SCREEN
-    //********************
+        //********************
+        //HOME SCREEN
+        //********************
 
     private void homeScreen() throws SQLException {
+        final UserRepositoryImpl userRepository = new UserRepositoryImpl(dataSource);
         boolean isRunning = true;
 
         while (isRunning) {
-            System.out.println("\n--- HOME SCREEN ---");
+            System.out.println("\n======== HOME SCREEN ========");
             System.out.println("1) Log in");
+            System.out.println("2) Sign up");
             System.out.println("0) Exit");
             System.out.print("Enter selection: ");
 
@@ -45,16 +49,53 @@ public class UserInterface {
 
             switch (input) {
                 case "1":
-                    System.out.print("Enter username: ");
-                    String username = scanner.nextLine();
+                    // Call the login method from UserRepository
+                    System.out.print("\nEnter your email: ");
+                    String email = scanner.nextLine();
+                    User user = userRepository.login(email);
+                    if (user != null) {
+                        System.out.println("\n===== LOGIN SUCCESSFUL! =====");
+                        System.out.println("User ID: " + user.getUserId());
+                        System.out.println("Name: " + user.getFirstName() + " " + user.getLastName());
+                        System.out.println("Email: " + user.getEmail());
+                        mainScreen();
+                    } else {
+                        System.out.println("User not found");
+                    }
+                    break;
+                case "2":
+                    System.out.println("\n===== CREATE NEW ACCOUNT =====");
 
-                    // verify user against the database here
+                    // Handles user input
+                    System.out.println("Enter your first name");
+                    String firstName = scanner.nextLine();
 
-                    System.out.println("Welcome, " + username + "!");
-                    mainScreen();
+                    System.out.println("Enter your last name");
+                    String lastName = scanner.nextLine();
+
+                    System.out.println("Enter your email");
+                    String yourEmail = scanner.nextLine();
+
+                    // Check if email already exists
+                    if (userRepository.emailExists(yourEmail)) {
+                        System.out.println("\n❌ Email already exists! Please use a different email.");
+                        return;
+                    }
+                    // Call the sign-up method from UserRepository
+                    double userID = userRepository.signUp(firstName, lastName, yourEmail);
+                    if (userID != 0.0) {
+                        System.out.println("\n✓ Account Created Successfully!");
+                        System.out.println("Your User ID: " + userID);
+                        System.out.println("Name: " + firstName + " " + lastName);
+                        System.out.println("Email: " + yourEmail);
+                        mainScreen();
+                    } else {
+                        // else prints user not found message.
+                        System.out.println("User not found. Try again or would you like to sign up?");
+                    }
                     break;
                 case "0":
-                    System.out.println("Exiting application...");
+                    System.out.println("Exiting application... GOODBYE!");
                     isRunning = false;
                     break;
                 default:
@@ -63,9 +104,9 @@ public class UserInterface {
         }
     }
 
-    //*********************
-    //MAIN SCREEN
-    //*********************
+        //*********************
+        //MAIN SCREEN
+        //*********************
 
     private void mainScreen() throws SQLException {
         boolean loggedIn = true;
