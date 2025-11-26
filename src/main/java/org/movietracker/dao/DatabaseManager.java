@@ -11,7 +11,7 @@ public class DatabaseManager {
     // Your username
     private static final String USER = "root";
     // Your password (I found this in your Main.java)
-    private static final String PASSWORD = "yearup@25";
+    private static final String PASSWORD = "yearup25";
 
     // This method creates the connection
     public static Connection getConnection() throws SQLException {

@@ -13,11 +13,24 @@ public class Movie {
     private String description;
     private Date releasedDate;
 
-    // Empty Constructor
+    // 1. Empty Constructor
     public Movie() {
     }
 
-    // Full Constructor
+    // 2. Lead's Constructor (7 arguments, NO CAST/ACTORS)
+    // This fixes the error in MovieRepositoryImpl
+    public Movie(double movie_id, String title, Genre genre, ParentalRating parentalRating, double avrRating, String description, Date releasedDate) {
+        this.movie_id = movie_id;
+        this.title = title;
+        this.genre = genre;
+        this.parentalRating = parentalRating;
+        this.avrRating = avrRating;
+        this.description = description;
+        this.releasedDate = releasedDate;
+        this.cast = null; // Set cast to null since they didn't provide it
+    }
+
+    // 3. Full Constructor (8 arguments, includes CAST)
     public Movie(double movie_id, String title, Genre genre, List<Actor> cast, ParentalRating parentalRating, double avrRating, String description, Date releasedDate) {
         this.movie_id = movie_id;
         this.title = title;
@@ -29,7 +42,7 @@ public class Movie {
         this.releasedDate = releasedDate;
     }
 
-    // Getters and Setters (Manual)
+    // --- GETTERS AND SETTERS ---
     public double getMovie_id() { return movie_id; }
     public void setMovie_id(double movie_id) { this.movie_id = movie_id; }
 
