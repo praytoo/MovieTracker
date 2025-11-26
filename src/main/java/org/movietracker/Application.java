@@ -1,7 +1,7 @@
 package org.movietracker;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.movietracker.repository.impl.MovieRepositoryImpl;
+import org.example.UserInterface;
 
 import java.sql.SQLException;
 
@@ -12,7 +12,7 @@ public class Application {
         bds.setUsername(args[0]);
         bds.setPassword(args[1]);
 
-        MovieRepositoryImpl movieRepository = new MovieRepositoryImpl(bds);
-        movieRepository.getAllMovies();
+        UserInterface cli = new UserInterface(bds);
+        cli.start();
     }
 }

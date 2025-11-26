@@ -1,9 +1,8 @@
 package org.movietracker.repository.impl;
 
-import lombok.AllArgsConstructor;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.movietracker.repository.MovieRepository;
 import org.movietracker.model.Movie;
+import org.movietracker.repository.MovieRepository;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,9 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 public class MovieRepositoryImpl implements MovieRepository {
     private final BasicDataSource dataSource;
+
+    public MovieRepositoryImpl(BasicDataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public void addMovie(Movie movie) {
@@ -30,7 +32,7 @@ public class MovieRepositoryImpl implements MovieRepository {
         List<Movie> movies = new ArrayList<>();
         try (Connection connection = dataSource.getConnection()) {
             ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM movies");
-            while(rs.next()) {
+            while (rs.next()) {
                 System.out.println("Movie id: " + rs.getString("movie_id"));
                 System.out.println("Date Released: " + rs.getString("date_released"));
                 System.out.println("Genre: " + rs.getString("genre"));
