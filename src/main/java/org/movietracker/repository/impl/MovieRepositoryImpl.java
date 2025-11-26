@@ -160,4 +160,110 @@ public class MovieRepositoryImpl implements MovieRepository {
 
         return movies;
     }
+
+    @Override
+    public List<Movie> getWishlistMoviesAlphabetically(int userId) throws SQLException {
+        final String sql = """
+        SELECT m.*
+        FROM Movies m
+        JOIN Wish_List_Relation w ON w.movie_id = m.movie_id
+        WHERE w.user_id = ?
+        ORDER BY m.title ASC
+        """;
+
+        List<Movie> movies = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                movies.add(mapMovie(rs));
+            }
+        }
+
+        return movies;
+    }
+
+    @Override
+    public List<Movie> getWishlistMoviesByRating(int userId) throws SQLException {
+        final String sql = """
+        SELECT m.*
+        FROM Movies m
+        JOIN Wish_List_Relation w ON w.movie_id = m.movie_id
+        WHERE w.user_id = ?
+        ORDER BY m.avg_percentage_rating DESC
+        """;
+
+        List<Movie> movies = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                movies.add(mapMovie(rs));
+            }
+        }
+
+        return movies;
+    }
+
+    @Override
+    public List<Movie> getWishlistMoviesByGenre(int userId, Genre genre) throws SQLException {
+        final String sql = """
+        SELECT m.*
+        FROM Movies m
+        JOIN Wish_List_Relation w ON w.movie_id = m.movie_id
+        WHERE w.user_id = ? AND m.genre = ?
+        ORDER BY m.title ASC
+        """;
+
+        List<Movie> movies = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            stmt.setString(2, genre.name());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                movies.add(mapMovie(rs));
+            }
+        }
+
+        return movies;
+    }
+
+    @Override
+    public List<Movie> getWishlistMoviesByYear(int userId, int year) throws SQLException {
+        final String sql = """
+        SELECT m.*
+        FROM Movies m
+        JOIN Wish_List_Relation w ON w.movie_id = m.movie_id
+        WHERE w.user_id = ? AND YEAR(m.date_released) = ?
+        ORDER BY m.date_released DESC
+        """;
+
+        List<Movie> movies = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            stmt.setInt(2, year);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                movies.add(mapMovie(rs));
+            }
+        }
+
+        return movies;
+    }
 }
