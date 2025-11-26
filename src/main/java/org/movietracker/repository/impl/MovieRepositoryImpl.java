@@ -1,5 +1,6 @@
 package org.movietracker.repository.impl;
 
+import lombok.AllArgsConstructor;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.movietracker.model.Movie;
 import org.movietracker.repository.MovieRepository;
