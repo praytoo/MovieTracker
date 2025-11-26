@@ -12,7 +12,7 @@ public class Application {
         bds.setUsername(args[0]);
         bds.setPassword(args[1]);
 
-        UserInterface cli = new UserInterface(bds);
+        UserInterface cli = new UserInterface();
         cli.start();
     }
 }

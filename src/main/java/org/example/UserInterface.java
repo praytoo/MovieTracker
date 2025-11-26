@@ -207,12 +207,7 @@ public class UserInterface {
         //******************************
 
         private void wishListMenu (Connection connection, int movieId) throws SQLException {
-            BasicDataSource dataSource = new BasicDataSource();
-            dataSource.setUrl("jdbc:mysql://localhost:3306/movie_tracker");
-            dataSource.setUsername("root");
-            dataSource.setPassword("yearup");
-
-            WishListRepositoryImpl wishlistRepo = new WishListRepositoryImpl(dataSource);
+            WishListRepositoryImpl wishlistRepo = new WishListRepositoryImpl();
         boolean inMenu = true;
 
             while (inMenu) {
