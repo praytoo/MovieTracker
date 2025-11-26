@@ -124,19 +124,19 @@ INSERT INTO Movies (title, genre, avg_percentage_rating, parental_rating, date_r
 VALUES
 ('The Shawshank Redemption', 'Drama', 93, 'R', '1994-09-22', 'Two imprisoned men bond over a number of years.'),
 ('The Godfather', 'Crime', 92, 'R', '1972-03-24', 'The aging patriarch of an organized crime dynasty transfers control to his reluctant son.'),
-('Inception', 'Sci-Fi', 88, 'PG-13', '2010-07-16', 'A thief who steals corporate secrets through dream-sharing technology.'),
+('Inception', 'Sci_Fi', 88, 'PG_13', '2010-07-16', 'A thief who steals corporate secrets through dream-sharing technology.'),
 ('Toy Story', 'Animation', 90, 'G', '1995-11-22', 'A cowboy doll is profoundly threatened when a new spaceman figure supplants him as top toy.'),
-('Avengers: Endgame', 'Action', 85, 'PG-13', '2019-04-26', 'After the devastating events of Infinity War, the Avengers assemble again.'),
+('Avengers: Endgame', 'Action', 85, 'PG_13', '2019-04-26', 'After the devastating events of Infinity War, the Avengers assemble again.'),
 ('Pulp Fiction', 'Crime', 89, 'R', '1994-10-14', 'The lives of two mob hitmen, a boxer, and others intertwine in four tales of violence and redemption.'),
-('The Dark Knight', 'Action', 94, 'PG-13', '2008-07-18', 'Batman sets out to dismantle organized crime in Gotham.'),
-('Forrest Gump', 'Drama', 91, 'PG-13', '1994-07-06', 'The presidencies of Kennedy and Johnson, the Vietnam War, and more through the eyes of Forrest Gump.'),
+('The Dark Knight', 'Action', 94, 'PG_13', '2008-07-18', 'Batman sets out to dismantle organized crime in Gotham.'),
+('Forrest Gump', 'Drama', 91, 'PG_13', '1994-07-06', 'The presidencies of Kennedy and Johnson, the Vietnam War, and more through the eyes of Forrest Gump.'),
 ('Gladiator', 'Action', 87, 'R', '2000-05-05', 'A former Roman General sets out to exact vengeance against the corrupt emperor.'),
-('Titanic', 'Romance', 89, 'PG-13', '1997-12-19', 'A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the Titanic.'),
-('Jurassic Park', 'Adventure', 86, 'PG-13', '1993-06-11', 'During a preview tour, a theme park suffers a major power breakdown that allows its cloned dinosaurs to run amok.'),
-('The Matrix', 'Sci-Fi', 88, 'R', '1999-03-31', 'A computer hacker learns about the true nature of his reality and his role in the war against its controllers.'),
-('Star Wars: A New Hope', 'Sci-Fi', 92, 'PG', '1977-05-25', 'Luke Skywalker joins forces to save the galaxy from the evil Empire.'),
+('Titanic', 'Romance', 89, 'PG_13', '1997-12-19', 'A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the Titanic.'),
+('Jurassic Park', 'Adventure', 86, 'PG_13', '1993-06-11', 'During a preview tour, a theme park suffers a major power breakdown that allows its cloned dinosaurs to run amok.'),
+('The Matrix', 'Sci_Fi', 88, 'R', '1999-03-31', 'A computer hacker learns about the true nature of his reality and his role in the war against its controllers.'),
+('Star Wars: A New Hope', 'Sci_Fi', 92, 'PG', '1977-05-25', 'Luke Skywalker joins forces to save the galaxy from the evil Empire.'),
 ('The Lion King', 'Animation', 90, 'G', '1994-06-24', 'A young lion prince flees his kingdom only to learn the true meaning of responsibility and bravery.'),
-('Spider-Man: No Way Home', 'Action', 87, 'PG-13', '1994-06-24', 'Peter Parker seeks Doctor Strange help to make the world forget his identity as Spider-Man.');
+('Spider-Man: No Way Home', 'Action', 87, 'PG_13', '1994-06-24', 'Peter Parker seeks Doctor Strange help to make the world forget his identity as Spider-Man.');
 
 
 INSERT INTO Users (first_name, last_name, email)
