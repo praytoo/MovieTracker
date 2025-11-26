@@ -21,11 +21,9 @@ public class UserInterface {
     private static final Scanner scanner = new Scanner(System.in);
     private final BasicDataSource dataSource;
 
-    // Constructor that receives the UserRepository
     public UserInterface(BasicDataSource dataSource) {
         this.dataSource = dataSource;
     }
-
 
     public void start() throws SQLException {
         System.out.println("Welcome to Binge Watch");
@@ -232,7 +230,7 @@ public class UserInterface {
                     System.out.print("Do you want to rate it? (yes/no): ");
                     String response = scanner.nextLine();
 
-                    if(response.equalsIgnoreCase("yes")) {
+                    if (response.equalsIgnoreCase("yes")) {
                         System.out.print("Enter rating (1-5): ");
                         String rating = scanner.nextLine();
                         // save rating to db

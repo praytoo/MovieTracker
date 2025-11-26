@@ -11,7 +11,7 @@ public class WishListRepository {
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie_tracker", args[0], args[1]);
         //displayAllMovies(connection);
         displayAllMovies(connection);
-        Integer movieId = promptMovieId();
+        int movieId = promptMovieId();
         addMovieToWishList(connection, movieId, 1);
         viewWishList(connection, 1);
         connection.close();
@@ -39,9 +39,9 @@ public class WishListRepository {
         }
     }
 
-    public static Integer promptMovieId() {
+    public static int promptMovieId() {
         System.out.println("What movie id would you like to add to your wish list?");
-        Integer movieId = scanner.nextInt();
+        int movieId = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Adding movie to wishlist...");
         return movieId;
@@ -62,7 +62,7 @@ public class WishListRepository {
         //null stays there in case no movie found
     }
 
-    public static void addMovieToWishList(Connection connection, Integer movieId, Integer user_id) throws SQLException {
+    public static void addMovieToWishList(Connection connection, int movieId, int user_id) throws SQLException {
         String query = "INSERT INTO wish_list_relation (movie_id, user_id) VALUES (?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, movieId);
@@ -71,7 +71,7 @@ public class WishListRepository {
         statement.executeUpdate();
     }
 
-    public static void viewWishList(Connection connection, Integer user_id) throws SQLException {
+    public static void viewWishList(Connection connection, int user_id) throws SQLException {
         // create statement
         String query = "SELECT * \n" +
                 "FROM movie_tracker.wish_list_relation AS wlr\n" +
