@@ -230,7 +230,7 @@ public class UserInterface {
                     System.out.print("Do you want to rate it? (yes/no): ");
                     String response = scanner.nextLine();
 
-                    if (response.equalsIgnoreCase("yes")) {
+                    if(response.equalsIgnoreCase("yes")) {
                         System.out.print("Enter rating (1-5): ");
                         String rating = scanner.nextLine();
                         // save rating to db
