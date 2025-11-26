@@ -7,6 +7,11 @@ import org.movietracker.model.Genre;
 import org.movietracker.model.Movie;
 import org.movietracker.repository.impl.MovieRepositoryImpl;
 
+// --- ARSI'S IMPORTS ---
+import org.movietracker.dao.WatchListDAO;
+import org.movietracker.model.WatchList;
+// ----------------------
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -30,9 +35,9 @@ public class UserInterface {
         homeScreen();
     }
 
-        //********************
-        //HOME SCREEN
-        //********************
+    //********************
+    //HOME SCREEN
+    //********************
 
     private void homeScreen() throws SQLException {
         final UserRepositoryImpl userRepository = new UserRepositoryImpl(dataSource);
@@ -58,7 +63,9 @@ public class UserInterface {
                         System.out.println("User ID: " + user.getUserId());
                         System.out.println("Name: " + user.getFirstName() + " " + user.getLastName());
                         System.out.println("Email: " + user.getEmail());
-                        mainScreen();
+
+                        // Pass the User ID to the main screen!
+                        mainScreen(user.getUserId());
                     } else {
                         System.out.println("User not found");
                     }
@@ -88,7 +95,9 @@ public class UserInterface {
                         System.out.println("Your User ID: " + userID);
                         System.out.println("Name: " + firstName + " " + lastName);
                         System.out.println("Email: " + yourEmail);
-                        mainScreen();
+
+                        // Pass the new User ID to the main screen!
+                        mainScreen((int) userID);
                     } else {
                         // else prints user not found message.
                         System.out.println("User not found. Try again or would you like to sign up?");
@@ -104,11 +113,12 @@ public class UserInterface {
         }
     }
 
-        //*********************
-        //MAIN SCREEN
-        //*********************
+    //*********************
+    //MAIN SCREEN
+    //*********************
 
-    private void mainScreen() throws SQLException {
+    // Updated to accept userId
+    private void mainScreen(int userId) throws SQLException {
         boolean loggedIn = true;
 
         while (loggedIn) {
@@ -123,11 +133,13 @@ public class UserInterface {
 
             switch (input) {
                 case "1":
-                    watchListMenu();
+                    // Pass userId to your menu
+                    watchListMenu(userId);
                     break;
                 case "2":
                     try {
-                        wishListMenu(1);
+                        // Pass userId to the wishlist menu (Fixed from hardcoded 1)
+                        wishListMenu(userId);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -183,8 +195,12 @@ public class UserInterface {
                     String genre = scanner.nextLine();
                     // logic to filter list by genre
                     System.out.println("Filtering for " + genre + "...");
-                    movies = movieRepository.getMoviesByGenre(Genre.valueOf((genre).toUpperCase()));
-                    printMoviesTable(movies.stream().toList());
+                    try {
+                        movies = movieRepository.getMoviesByGenre(Genre.valueOf((genre).toUpperCase()));
+                        printMoviesTable(movies.stream().toList());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Invalid genre.");
+                    }
                     break;
                 case "4":
                     // logic to sort or filter by year
@@ -202,11 +218,13 @@ public class UserInterface {
     }
 
     //****************************
-    //WATCHLIST
+    //WATCHLIST (ARSI'S FEATURE)
     //****************************
 
-    private void watchListMenu() {
+    private void watchListMenu(int userId) {
         boolean inMenu = true;
+        // Instantiate your DAO
+        WatchListDAO watchListDAO = new WatchListDAO();
 
         while (inMenu) {
             System.out.println("\n--- MY WATCHLIST ---");
@@ -220,28 +238,59 @@ public class UserInterface {
 
             switch (input) {
                 case "1":
-                    // need to get watchlist from db and display it
-                    System.out.println("Listing watchlist...");
+                    System.out.println("\nListing watchlist...");
+                    List<WatchList> myWatchList = watchListDAO.getWatchList(userId);
+
+                    if (myWatchList.isEmpty()) {
+                        System.out.println("Your watchlist is empty.");
+                    } else {
+                        // Simple print format
+                        for (WatchList w : myWatchList) {
+                            System.out.println("• " + w.getTitle() + " (Your Rating: " + w.getAvgPercentageRating() + "%)");
+                        }
+                    }
                     break;
+
                 case "2":
-                    System.out.print("What movie did you watch? ");
-                    String movieName = scanner.nextLine();
+                    System.out.print("Enter the ID of the movie you watched: ");
+                    // Use ID because DAO requires it
+                    int movieId = -1;
+                    if(scanner.hasNextInt()) {
+                        movieId = scanner.nextInt();
+                        scanner.nextLine(); // consume newline
+                    } else {
+                        System.out.println("Invalid ID.");
+                        scanner.nextLine();
+                        break;
+                    }
+
+                    // Add to watchlist
+                    watchListDAO.addToWatchList(userId, movieId);
 
                     System.out.print("Do you want to rate it? (yes/no): ");
                     String response = scanner.nextLine();
 
                     if (response.equalsIgnoreCase("yes")) {
-                        System.out.print("Enter rating (1-5): ");
-                        String rating = scanner.nextLine();
-                        // save rating to db
+                        System.out.print("Enter rating (0-100): ");
+                        if(scanner.hasNextInt()) {
+                            int rating = scanner.nextInt();
+                            scanner.nextLine(); // consume newline
+                            watchListDAO.postMovieRating(userId, movieId, rating);
+                        } else {
+                            System.out.println("Invalid rating number.");
+                            scanner.nextLine();
+                        }
                     }
-                    // save movie to watched list table
-                    System.out.println("Saved " + movieName + " to watchlist.");
                     break;
+
                 case "3":
-                    // stream limit logic
-                    System.out.println("Showing top 5...");
+                    System.out.println("\n--- Top 5 Highest Rated Movies ---");
+                    List<Movie> top5 = watchListDAO.getTop5Movies();
+                    for (Movie m : top5) {
+                        System.out.printf("★ %s - %.1f\n", m.getTitle(), m.getAvrRating());
+                    }
                     break;
+
                 case "0":
                     inMenu = false;
                     break;
@@ -255,7 +304,8 @@ public class UserInterface {
     // WISHLIST
     //******************************
 
-    private void wishListMenu(int movieId) throws SQLException {
+    // Renamed parameter to userId to be consistent
+    private void wishListMenu(int userId) throws SQLException {
         boolean inMenu = true;
         Connection connection = dataSource.getConnection();
 
@@ -270,17 +320,25 @@ public class UserInterface {
 
             switch (input) {
                 case "1":
-                    // get wishlist from db
                     System.out.println("Listing wishlist...");
-                    WishListRepository.viewWishList(connection, 1);
+                    // Updated to use real userId
+                    WishListRepository.viewWishList(connection, userId);
                     break;
                 case "2":
                     WishListRepository.displayAllMovies(connection);
-                    System.out.print("What movie do you want to watch? ");
-                    String movieName = scanner.nextLine();
-                    // add to wishlist table
-                    WishListRepository.addMovieToWishList(connection, movieId, 1);
-                    System.out.println(movieName + " added to wishlist!");
+                    System.out.print("Enter the Movie ID to add: ");
+                    // Assuming this takes an ID based on previous context
+                    int mid = -1;
+                    if(scanner.hasNextInt()) {
+                        mid = scanner.nextInt();
+                        scanner.nextLine();
+                    }
+
+                    if (mid != -1) {
+                        // Updated to use real userId
+                        WishListRepository.addMovieToWishList(connection, mid, userId);
+                        System.out.println("Movie added to wishlist!");
+                    }
                     break;
                 case "0":
                     inMenu = false;
