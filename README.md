@@ -1,7 +1,10 @@
 # 🎬 Binge Watch - Movie Tracker
 A collaborative Java project demonstrating team development workflows, Git branch management, and object-oriented programming principles. This console application provides a movie database interface with user management and personal movie tracking features.
 
+
+
 # ✨ Features
+<img width="1766" height="1040" alt="image" src="https://github.com/user-attachments/assets/ff5d66cf-1fcc-4175-accd-d38f699f0773" />
 
 ## 🔐 User Management
 * **User Registration & Login** - Create an account and log in with email
