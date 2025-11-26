@@ -214,6 +214,7 @@ public class UserInterface {
                 System.out.println("\n--- MY WISHLIST ---");
                 System.out.println("1) List my WishList movies");
                 System.out.println("2) Add movie to WishList");
+                System.out.println("3) Sort Movies");
                 System.out.println("0) Go to Main Screen");
                 System.out.print("Enter selection: ");
 
@@ -233,6 +234,9 @@ public class UserInterface {
                         // add to wishlist table
                         wishlistRepo.addMovieToWishList(connection, movieId, 1);
                         System.out.println(movieName + " added to wishlist!");
+                        break;
+                    case "3":
+                        allMoviesMenu();
                         break;
                     case "0":
                         inMenu = false;
