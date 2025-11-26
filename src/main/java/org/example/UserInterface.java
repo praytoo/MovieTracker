@@ -3,7 +3,6 @@ package org.example;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.movietracker.model.User;
 import org.movietracker.repository.impl.UserRepositoryImpl;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.movietracker.model.Genre;
 import org.movietracker.model.Movie;
 import org.movietracker.repository.impl.MovieRepositoryImpl;
@@ -37,7 +36,7 @@ public class UserInterface {
         //HOME SCREEN
         //********************
 
-    private void homeScreen() {
+    private void homeScreen() throws SQLException {
         final UserRepositoryImpl userRepository = new UserRepositoryImpl(dataSource);
         boolean isRunning = true;
 
@@ -62,6 +61,8 @@ public class UserInterface {
                         System.out.println("Name: " + user.getFirstName() + " " + user.getLastName());
                         System.out.println("Email: " + user.getEmail());
                         mainScreen();
+                    } else {
+                        System.out.println("User not found");
                     }
                     break;
                 case "2":
@@ -89,6 +90,7 @@ public class UserInterface {
                         System.out.println("Your User ID: " + userID);
                         System.out.println("Name: " + firstName + " " + lastName);
                         System.out.println("Email: " + yourEmail);
+                        mainScreen();
                     } else {
                         // else prints user not found message.
                         System.out.println("User not found. Try again or would you like to sign up?");
