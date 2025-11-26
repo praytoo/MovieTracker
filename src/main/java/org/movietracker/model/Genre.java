@@ -10,5 +10,7 @@ public enum Genre {
     SCI_FI,
     FANTASY,
     DOCUMENTARY,
-    ANIMATION
+    ANIMATION,
+    CRIME,
+    ADVENTURE
 }
