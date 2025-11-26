@@ -1,6 +1,8 @@
 package org.example;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.movietracker.repository.WishListRepository;
+import org.movietracker.repository.impl.WishListRepositoryImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +13,6 @@ public class UserInterface {
     private static Scanner scanner = new Scanner(System.in);
 
     private Connection connection;
-
 
     public static void main(String[] args) throws SQLException {
         UserInterface app = new UserInterface();
@@ -206,7 +207,13 @@ public class UserInterface {
         //******************************
 
         private void wishListMenu (Connection connection, int movieId) throws SQLException {
-            boolean inMenu = true;
+            BasicDataSource dataSource = new BasicDataSource();
+            dataSource.setUrl("jdbc:mysql://localhost:3306/movie_tracker");
+            dataSource.setUsername("root");
+            dataSource.setPassword("yearup");
+
+            WishListRepositoryImpl wishlistRepo = new WishListRepositoryImpl(dataSource);
+        boolean inMenu = true;
 
             while (inMenu) {
                 System.out.println("\n--- MY WISHLIST ---");
@@ -222,14 +229,14 @@ public class UserInterface {
                         // get wishlist from db
                         System.out.println("Listing wishlist...");
                         Connection Connection;
-                        WishListRepository.viewWishList(connection, 1);
+                        wishlistRepo.viewWishList(connection, 1);
                         break;
                     case "2":
-                        WishListRepository.displayAllMovies(connection);
+                        wishlistRepo.displayAllMovies(connection);
                         System.out.print("What movie do you want to watch? ");
                         String movieName = scanner.nextLine();
                         // add to wishlist table
-                        WishListRepository.addMovieToWishList(connection, movieId, 1);
+                        wishlistRepo.addMovieToWishList(connection, movieId, 1);
                         System.out.println(movieName + " added to wishlist!");
                         break;
                     case "0":

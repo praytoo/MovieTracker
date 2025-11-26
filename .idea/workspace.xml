@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6190ad82-9646-4f81-ba24-af80e47e42d0" name="Changes" comment="update">
+    <list default="true" id="6190ad82-9646-4f81-ba24-af80e47e42d0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/impl/WishListRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/WishListRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/WishListRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/impl/MovieRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/movietracker/repository/impl/MovieRepositoryImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,12 +34,12 @@
     &quot;assignee&quot;: &quot;vita-sych&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/praytoo/MovieTracker",
-    "accountId": "07c98109-a5f6-4058-af3d-ddda863926d5"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/praytoo/MovieTracker&quot;,
+    &quot;accountId&quot;: &quot;07c98109-a5f6-4058-af3d-ddda863926d5&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -55,7 +58,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "#19 on feature/getwishlist",
+    "git-widget-placeholder": "feature/getwishlist",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/vitasych/IdeaProjects/MovieTracker/pom.xml",
     "project.structure.last.edited": "Project",
@@ -98,13 +101,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WishListRepository" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.movietracker.repository.WishListRepository" />
+    <configuration name="WishListRepositoryImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.movietracker.repository.impl.WishListRepositoryImpl" />
       <module name="MovieTracker" />
       <option name="PROGRAM_PARAMETERS" value="root yearup" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.movietracker.repository.*" />
+          <option name="PATTERN" value="org.movietracker.repository.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -115,12 +118,12 @@
     <list>
       <item itemvalue="Application.UserInterface" />
       <item itemvalue="Application.Application" />
-      <item itemvalue="Application.WishListRepository" />
+      <item itemvalue="Application.WishListRepositoryImpl" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.UserInterface" />
-        <item itemvalue="Application.WishListRepository" />
+        <item itemvalue="Application.WishListRepositoryImpl" />
         <item itemvalue="Application.Application" />
       </list>
     </recent_temporary>

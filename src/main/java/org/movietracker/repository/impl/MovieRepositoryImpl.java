@@ -14,6 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 public class MovieRepositoryImpl implements MovieRepository {
     private final BasicDataSource dataSource;
+    public MovieRepositoryImpl(BasicDataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public void addMovie(Movie movie) {
