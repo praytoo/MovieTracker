@@ -1,5 +1,12 @@
 package org.example;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.movietracker.model.Genre;
+import org.movietracker.model.Movie;
+import org.movietracker.repository.impl.MovieRepositoryImpl;
+
+import java.sql.SQLException;
+import java.util.List;
 import org.movietracker.repository.WishListRepository;
 
 import java.sql.Connection;
@@ -7,9 +14,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class UserInterface {
-    private static Scanner scanner = new Scanner(System.in);
+import static org.movietracker.servises.DataViewService.printMoviesTable;
 
+public class UserInterface {
+    private static final Scanner scanner = new Scanner(System.in);
+    private final BasicDataSource dataSource;
+
+    public UserInterface(BasicDataSource dataSource) {
+        this.dataSource = dataSource;
+    }
     private Connection connection;
 
 
@@ -19,17 +32,17 @@ public class UserInterface {
                app.start();
     }
 
-        public void start () {
-            System.out.println("Welcome to Binge Watch");
-            homeScreen();
-        }
+    public void start() throws SQLException {
+        System.out.println("Welcome to Binge Watch");
+        homeScreen();
+    }
 
         //********************
         //HOME SCREEN
         //********************
 
-        private void homeScreen () {
-            boolean isRunning = true;
+    private void homeScreen() throws SQLException {
+        boolean isRunning = true;
 
             while (isRunning) {
                 System.out.println("\n--- HOME SCREEN ---");
@@ -63,8 +76,8 @@ public class UserInterface {
         //MAIN SCREEN
         //*********************
 
-        private void mainScreen () {
-            boolean loggedIn = true;
+    private void mainScreen() throws SQLException {
+        boolean loggedIn = true;
 
             while (loggedIn) {
                 System.out.println("\n--- MAIN SCREEN ---");
@@ -104,59 +117,64 @@ public class UserInterface {
         //ALL MOVIES
         //*******************
 
-        private void allMoviesMenu () {
-            boolean inMenu = true;
+    private void allMoviesMenu() throws SQLException {
+        boolean inMenu = true;
+        MovieRepositoryImpl movieRepository = new MovieRepositoryImpl(dataSource);
+        List<Movie> movies;
 
-            while (inMenu) {
-                System.out.println("\n--- ALL MOVIES ---");
-                System.out.println("1) List all movies by alphabetical order");
-                System.out.println("2) List by rating");
-                System.out.println("3) List by genres");
-                System.out.println("4) List by year");
-                System.out.println("5) List by actor");
-                System.out.println("0) Go to Main Screen");
-                System.out.print("Enter selection: ");
+        while (inMenu) {
+            System.out.println("\n--- ALL MOVIES ---");
+            System.out.println("1) List all movies by alphabetical order");
+            System.out.println("2) List by rating");
+            System.out.println("3) List by genres");
+            System.out.println("4) List by year");
+            System.out.println("0) Go to Main Screen");
+            System.out.print("Enter selection: ");
 
-                String input = scanner.nextLine();
+            String input = scanner.nextLine();
 
-                switch (input) {
-                    case "1":
-                        // logic to sort by title
-                        System.out.println("Sorting alphabetically...");
-                        break;
-                    case "2":
-                        // logic to sort by rating
-                        System.out.println("Sorting by rating...");
-                        break;
-                    case "3":
-                        System.out.print("Enter genre to filter: ");
-                        String genre = scanner.nextLine();
-                        // logic to filter list by genre
-                        System.out.println("Filtering for " + genre + "...");
-                        break;
-                    case "4":
-                        // logic to sort or filter by year
-                        System.out.println("Sorting by year...");
-                        break;
-                    case "5":
-                        // logic to filter by actor
-                        System.out.println("Filtering by actor...");
-                        break;
-                    case "0":
-                        inMenu = false;
-                        break;
-                    default:
-                        System.out.println("Invalid option.");
-                }
+            switch (input) {
+                case "1":
+                    // logic to sort by title
+                    System.out.println("Sorting alphabetically...");
+                    movies = movieRepository.getMoviesAlphabetically();
+                    printMoviesTable(movies.stream().toList());
+                    break;
+                case "2":
+                    // logic to sort by rating
+                    System.out.println("Sorting by rating...");
+                    movies = movieRepository.getMoviesByRating();
+                    printMoviesTable(movies.stream().toList());
+                    break;
+                case "3":
+                    System.out.print("Enter genre to filter: ");
+                    String genre = scanner.nextLine();
+                    // logic to filter list by genre
+                    System.out.println("Filtering for " + genre + "...");
+                    movies = movieRepository.getMoviesByGenre(Genre.valueOf((genre).toUpperCase()));
+                    printMoviesTable(movies.stream().toList());
+                    break;
+                case "4":
+                    // logic to sort or filter by year
+                    System.out.println("Sorting by year...");
+                    movies = movieRepository.getMoviesByYear();
+                    printMoviesTable(movies.stream().toList());
+                    break;
+                case "0":
+                    inMenu = false;
+                    break;
+                default:
+                    System.out.println("Invalid option.");
             }
         }
+    }
 
         //****************************
         //WATCHLIST
         //****************************
 
-        private void watchListMenu () {
-            boolean inMenu = true;
+    private void watchListMenu() {
+        boolean inMenu = true;
 
             while (inMenu) {
                 System.out.println("\n--- MY WATCHLIST ---");
