@@ -76,6 +76,7 @@ public class WishListRepositoryImpl implements WishListRepository {
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, movieId);
         statement.setInt(2, user_id);
+
         //execute query
         statement.executeUpdate();
     }
@@ -98,6 +99,7 @@ public class WishListRepositoryImpl implements WishListRepository {
             System.out.println("Id: " + rs.getInt("id"));
             System.out.println("Movie id: " + rs.getInt("movie_id"));
             System.out.println("User id: " + rs.getInt("user_id"));
+            System.out.println("Title: " + rs.getString("title"));
             System.out.println("--------------------");
         }
     }
