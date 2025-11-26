@@ -16,7 +16,6 @@ import java.util.List;
 
 public class MovieRepositoryImpl implements MovieRepository {
     private final BasicDataSource dataSource;
-
     public MovieRepositoryImpl(BasicDataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -47,7 +46,7 @@ public class MovieRepositoryImpl implements MovieRepository {
             stmt.setString(2, movie.getGenre().name());
             stmt.setInt(3, (int) movie.getAvrRating());
             stmt.setString(4, movie.getParentalRating().name());
-            stmt.setDate(5, new Date(movie.getReleasedDate().getTime()));
+            //stmt.setDate(5, new Date(movie.getReleasedDate().getTime()));
             stmt.setString(6, movie.getDescription());
 
             stmt.executeUpdate();
