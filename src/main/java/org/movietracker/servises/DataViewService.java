@@ -16,13 +16,12 @@ public class DataViewService {
             String shortenedDesc = m.getDescription();
 
             System.out.printf(
-                    "%-5.0f %-25s %-12s %-8.2f %-15s %-12s %-40s%n",
-                    m.getMovie_id(),
+                    "%-25s %-12s %-8.2f %-15s %-12s %-40s%n",
                     m.getTitle(),
                     m.getGenre().name(),
                     m.getAvrRating(),
                     m.getParentalRating().name(),
-                    m.getReleasedDate(),
+                    m.getReleasedDate().toString(),
                     shortenedDesc
             );
         }

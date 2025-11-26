@@ -45,8 +45,8 @@ public class Movie {
         return (Enum<E>) parentalRating;
     }
 
-    public ResultSet getReleasedDate() {
-        return (ResultSet) releasedDate;
+    public Date getReleasedDate() {
+        return releasedDate;
     }
 
     public String getDescription() {

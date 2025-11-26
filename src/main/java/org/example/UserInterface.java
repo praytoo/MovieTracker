@@ -1,16 +1,25 @@
 package org.example;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.movietracker.model.Genre;
+import org.movietracker.model.Movie;
 import org.movietracker.repository.WishListRepository;
+import org.movietracker.repository.impl.MovieRepositoryImpl;
 import org.movietracker.repository.impl.WishListRepositoryImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
+
+import static org.movietracker.servises.DataViewService.printMoviesTable;
 
 public class UserInterface {
     private static Scanner scanner = new Scanner(System.in);
+
+    MovieRepositoryImpl movieRepository = new MovieRepositoryImpl();
+    List<Movie> movies;
 
     private Connection connection;
 
@@ -20,7 +29,7 @@ public class UserInterface {
                app.start();
     }
 
-        public void start () {
+        public void start () throws SQLException {
             System.out.println("Welcome to Binge Watch");
             homeScreen();
         }
@@ -29,7 +38,7 @@ public class UserInterface {
         //HOME SCREEN
         //********************
 
-        private void homeScreen () {
+        private void homeScreen () throws SQLException {
             boolean isRunning = true;
 
             while (isRunning) {
@@ -64,7 +73,7 @@ public class UserInterface {
         //MAIN SCREEN
         //*********************
 
-        private void mainScreen () {
+        private void mainScreen () throws SQLException {
             boolean loggedIn = true;
 
             while (loggedIn) {
@@ -105,8 +114,8 @@ public class UserInterface {
         //ALL MOVIES
         //*******************
 
-        private void allMoviesMenu () {
-            boolean inMenu = true;
+        public void allMoviesMenu () throws SQLException {
+        boolean inMenu = true;
 
             while (inMenu) {
                 System.out.println("\n--- ALL MOVIES ---");
@@ -124,20 +133,28 @@ public class UserInterface {
                     case "1":
                         // logic to sort by title
                         System.out.println("Sorting alphabetically...");
+                        movies = movieRepository.getMoviesAlphabetically();
+                        printMoviesTable(movies.stream().toList());
                         break;
                     case "2":
                         // logic to sort by rating
                         System.out.println("Sorting by rating...");
+                        movies = movieRepository.getMoviesByRating();
+                        printMoviesTable(movies.stream().toList());
                         break;
                     case "3":
                         System.out.print("Enter genre to filter: ");
                         String genre = scanner.nextLine();
                         // logic to filter list by genre
                         System.out.println("Filtering for " + genre + "...");
+                        movies = movieRepository.getMoviesByGenre(Genre.valueOf((genre).replace("-", "_").toUpperCase()));
+                        printMoviesTable(movies.stream().toList());
                         break;
                     case "4":
                         // logic to sort or filter by year
                         System.out.println("Sorting by year...");
+                        movies = movieRepository.getMoviesByYear();
+                        printMoviesTable(movies.stream().toList());
                         break;
                     case "5":
                         // logic to filter by actor

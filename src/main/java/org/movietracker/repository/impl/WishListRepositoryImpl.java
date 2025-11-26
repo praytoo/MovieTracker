@@ -12,18 +12,6 @@ import java.util.Scanner;
 public class WishListRepositoryImpl implements WishListRepository {
     private static Scanner scanner = new Scanner(System.in);
 
-    /*public static void main(String[] args) throws SQLException {
-        // get the connection
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie_tracker", args[0], args[1]);
-        //displayAllMovies(connection);
-        displayAllMovies(connection);
-        int movieId = promptMovieId();
-        addMovieToWishList(connection, movieId, 1);
-        viewWishList(connection, 1);
-        connection.close();
-        scanner.close();
-    }*/
-
     @Override
     public void displayAllMovies(Connection connection) throws SQLException {
         // create statement

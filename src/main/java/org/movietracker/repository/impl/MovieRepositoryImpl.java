@@ -16,7 +16,15 @@ import java.util.List;
 
 public class MovieRepositoryImpl implements MovieRepository {
     private final BasicDataSource dataSource;
+
     public MovieRepositoryImpl(BasicDataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+    public MovieRepositoryImpl(){
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setUrl("jdbc:mysql://localhost:3306/movie_tracker");
+        dataSource.setUsername("root");
+        dataSource.setPassword("yearup");
         this.dataSource = dataSource;
     }
 
@@ -24,8 +32,8 @@ public class MovieRepositoryImpl implements MovieRepository {
         return new Movie(
                 rs.getInt("movie_id"),
                 rs.getString("title"),
-                Genre.valueOf(rs.getString("genre").toUpperCase()),
-                ParentalRating.valueOf(rs.getString("parental_rating").toUpperCase()),
+                Genre.valueOf(rs.getString("genre").replace("-", "_").toUpperCase()),
+                ParentalRating.valueOf(rs.getString("parental_rating").replace("-", "_").toUpperCase()),
                 rs.getDouble("avg_percentage_rating"),
                 rs.getString("description"),
                 rs.getDate("date_released")
