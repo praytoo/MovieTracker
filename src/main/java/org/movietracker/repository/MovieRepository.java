@@ -14,4 +14,9 @@ public interface MovieRepository {
     List<Movie> getMoviesByRating() throws SQLException;
     List<Movie> getMoviesByGenre(Genre genre) throws SQLException;
     List<Movie> getMoviesByYear() throws SQLException;
+    List<Movie> getWishlistMoviesAlphabetically(int userId) throws SQLException;
+    List<Movie> getWishlistMoviesByRating(int userId) throws SQLException;
+    List<Movie> getWishlistMoviesByGenre(int userId, Genre genre) throws SQLException;
+    List<Movie> getWishlistMoviesByYear(int userId, int year) throws SQLException;
+
 }
